@@ -1,0 +1,167 @@
+.section {
+    padding: 160px 0;
+    background: var(--background);
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.fullWidthContainer {
+    width: 100%;
+    max-width: 100vw;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 80px;
+    padding: 0 20px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    background: rgba(255, 140, 0, 0.05);
+    border: 1px solid rgba(255, 140, 0, 0.2);
+    color: var(--primary);
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    margin-bottom: 30px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background: var(--primary);
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--primary);
+}
+
+.title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+}
+
+.subtext {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.marqueeSection {
+    position: relative;
+    width: 100%;
+    margin-top: 40px;
+}
+
+.marqueeRow {
+    margin-bottom: 2rem;
+    padding: 10px 0;
+    width: 100%;
+}
+
+.card {
+    width: 450px;
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 28px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: all 0.3s ease;
+    cursor: default;
+    margin: 0 10px;
+}
+
+.card:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 140, 0, 0.2);
+    transform: translateY(-5px);
+}
+
+.stars {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 5px;
+}
+
+.content {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    font-style: italic;
+}
+
+.cardFooter {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: white;
+}
+
+.role {
+    font-size: 0.9rem;
+    color: var(--primary);
+    font-weight: 600;
+    margin-top: 2px;
+}
+
+/* Gradients for fading edges */
+.gradientLeft,
+.gradientRight {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 250px;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.gradientLeft {
+    left: 0;
+    background: linear-gradient(to right, var(--background) 0%, transparent 100%);
+}
+
+.gradientRight {
+    right: 0;
+    background: linear-gradient(to left, var(--background) 0%, transparent 100%);
+}
+
+@media (max-width: 768px) {
+    .section {
+        padding: 100px 0;
+    }
+
+    .title {
+        font-size: 2.5rem;
+    }
+
+    .card {
+        width: 320px;
+        padding: 30px;
+    }
+
+    .gradientLeft,
+    .gradientRight {
+        width: 100px;
+    }
+}

@@ -1,0 +1,152 @@
+.section {
+    padding: 140px 0;
+    background: #000;
+    position: relative;
+    /* Clean background, no borders/glows as per image reference it seems quite solid or subtle gradient */
+}
+
+.wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Form Container similar to the card in image */
+.form {
+    background: linear-gradient(180deg, #0A0A0A 0%, #050505 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* Subtle goldish border if needed, screenshot has thin border */
+    border-radius: 20px;
+    padding: 60px 80px;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Hide the left info column for now as the screenshot implies a full-width or centered form card */
+.infoColumn {
+    display: none;
+}
+
+.formColumn {
+    width: 100%;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    /* Generous spacing */
+    margin-bottom: 40px;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.02em;
+}
+
+.input,
+.select,
+.textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 10px 0;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+    /* Placeholder color style */
+    font-family: inherit;
+    outline: none;
+    border-radius: 0;
+    transition: border-color 0.3s ease;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+    color: #fff;
+    border-bottom-color: #fff;
+}
+
+/* Select Styling */
+.select option {
+    background: #111;
+    color: #fff;
+}
+
+.textarea {
+    resize: none;
+    min-height: 40px;
+}
+
+/* Footer Area */
+.formFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.submitBtn {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    padding: 12px 40px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submitBtn:hover {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
+.expectText {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .section {
+        padding: 80px 0;
+    }
+
+    .form {
+        padding: 40px 24px;
+    }
+
+    .row {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+
+    .inputGroup {
+        margin-bottom: 20px;
+    }
+
+    .formFooter {
+        flex-direction: column;
+        gap: 24px;
+        align-items: center;
+        text-align: center;
+    }
+
+    .submitBtn {
+        width: 100%;
+        padding: 14px;
+    }
+}

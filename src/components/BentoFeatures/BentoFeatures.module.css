@@ -1,0 +1,325 @@
+.section {
+    padding: 160px 0;
+    background: #000;
+    position: relative;
+    overflow: hidden;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 24px;
+    background: rgba(255, 140, 0, 0.05);
+    border: 1px solid rgba(255, 140, 0, 0.15);
+    color: var(--primary);
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.4em;
+    margin-bottom: 30px;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    background: var(--primary);
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--primary);
+}
+
+.title {
+    font-size: 4rem;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    margin-bottom: 20px;
+}
+
+.description {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.4);
+    line-height: 1.6;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(280px, auto);
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    grid-auto-flow: dense;
+}
+
+.card {
+    background: #0A0A0A;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 30px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.4s ease;
+}
+
+.card:hover {
+    border-color: rgba(255, 140, 0, 0.3);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+}
+
+/* Grid Spans */
+.card4 {
+    grid-row: span 2;
+    background: linear-gradient(180deg, #0A0A0A 0%, #111 100%);
+    justify-content: flex-start;
+}
+
+.card6 {
+    grid-column: span 2;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cardTitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.cardText {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.5;
+}
+
+/* Specific Card Styles */
+.card1 .visualWrapper {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    transition: transform 0.5s ease;
+}
+
+.card1:hover .visualWrapper {
+    transform: scale(1.1);
+}
+
+.card3 .socialStack {
+    margin-top: 20px;
+}
+
+/* Card 4 - TikTok Phone Mock */
+.card4 .cardHeader {
+    margin-bottom: 20px;
+    z-index: 2;
+}
+
+.socialLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--primary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-top: 10px;
+    text-decoration: none;
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s;
+}
+
+.socialLink:hover {
+    border-color: var(--primary);
+    transform: translateX(5px);
+}
+
+.phoneContainer {
+    position: relative;
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    /* Align phone to bottom */
+    margin-top: 20px;
+}
+
+.phoneMockup {
+    width: 220px;
+    height: 380px;
+    /* Adjust height based on card */
+    background: #000;
+    border: 8px solid #222;
+    border-radius: 36px 36px 0 0;
+    /* Rounded top, flat bottom to look like it rises up */
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    transform: translateY(10px);
+    transition: transform 0.5s ease;
+    border-bottom: none;
+}
+
+.card4:hover .phoneMockup {
+    transform: translateY(0px);
+}
+
+.phoneNotch {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 24px;
+    background: #222;
+    border-radius: 0 0 16px 16px;
+    z-index: 10;
+}
+
+.phoneScreen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #111;
+}
+
+.phoneImage {
+    object-fit: cover;
+    opacity: 0.8;
+    transition: opacity 0.5s ease;
+}
+
+.card4:hover .phoneImage {
+    opacity: 1;
+}
+
+
+/* Card 5 */
+.card5 .barChart {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    height: 100px;
+    margin-top: auto;
+}
+
+.bar {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px 4px 0 0;
+    transition: background 0.3s ease;
+}
+
+.card5:hover .bar {
+    background: var(--primary);
+}
+
+/* Card 6 */
+.card6 .moneyBag {
+    position: absolute;
+    right: -20px;
+    bottom: -30px;
+    transition: transform 0.5s ease;
+}
+
+.card6:hover .moneyBag {
+    transform: scale(1.1) rotate(-10deg);
+}
+
+/* Card 7 - MVPs */
+.rocketSmall {
+    position: absolute;
+    bottom: -40px;
+    right: -20px;
+    transform: rotate(-10deg);
+    transition: transform 0.5s ease;
+}
+
+.card7:hover .rocketSmall {
+    transform: rotate(0deg) translateY(-10px) scale(1.1);
+}
+
+/* Card 8 */
+.card7 .iconGrid {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.appIcon {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.appIcon:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card4 {
+        grid-row: span 1;
+    }
+
+    .card6 {
+        grid-column: span 2;
+    }
+
+    .phoneMockup {
+        width: 180px;
+        height: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .section {
+        padding: 100px 0;
+    }
+
+    .title {
+        font-size: 3rem;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card6 {
+        grid-column: span 1;
+        flex-direction: column;
+    }
+
+    .card {
+        min-height: 250px;
+    }
+
+    .card4 {
+        grid-row: span 1;
+        min-height: 400px;
+    }
+}

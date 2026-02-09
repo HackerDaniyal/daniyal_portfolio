@@ -1,0 +1,352 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;800;900&display=swap');
+
+.section {
+    padding: 160px 0;
+    background: #000;
+    position: relative;
+    font-family: 'Inter', sans-serif;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    background: #000;
+    border: 1px solid rgba(255, 140, 0, 0.3);
+    color: var(--primary);
+    border-radius: 100px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    background: var(--primary);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--primary);
+}
+
+.title {
+    font-size: 4.5rem;
+    font-weight: 900;
+    color: white;
+    margin-top: 25px;
+    letter-spacing: -0.03em;
+    line-height: 1;
+}
+
+.subtext {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+.starsContainer {
+    display: flex;
+    gap: 4px;
+}
+
+.socialText {
+    font-size: 0.8rem;
+    color: #FFFFFF;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.card {
+    background: #0D0D0D;
+    border-radius: 40px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cardFeatured {
+    border: 2px solid var(--primary);
+    box-shadow: 0 0 40px rgba(255, 140, 0, 0.1);
+}
+
+.innerBox {
+    border-radius: 30px;
+    padding: 35px 28px;
+    display: flex;
+    flex-direction: column;
+    min-height: 550px;
+}
+
+.white {
+    background: #FFFFFF;
+    color: black;
+}
+
+.gold {
+    background: var(--primary);
+    color: black;
+}
+
+.blue {
+    background: #E7F5F6;
+    color: black;
+}
+
+.avatarBadge {
+    position: absolute;
+    top: -28px;
+    right: -2px;
+    z-index: 30;
+}
+
+.seal {
+    width: 75px;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sealSvg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4));
+}
+
+.avatarImageWrapper {
+    position: relative;
+    z-index: 2;
+    width: 65px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.avatarImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pillHeader {
+    background: #000;
+    border-radius: 18px;
+    padding: 16px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.nameWrapper {
+    position: relative;
+}
+
+.planName {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    color: white;
+    letter-spacing: 0.04em;
+    line-height: 1;
+}
+
+.scribble {
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 12px;
+    opacity: 0.8;
+}
+
+.headerIconCircle {
+    width: 26px;
+    height: 26px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+}
+
+.priceSection {
+    display: flex;
+    align-items: baseline;
+    font-family: 'Bebas Neue', sans-serif;
+    margin-bottom: 35px;
+}
+
+.currency {
+    font-size: 4rem;
+    font-weight: 400;
+}
+
+.price {
+    font-size: 7.5rem;
+    line-height: 0.8;
+    margin: 0 4px;
+    font-weight: 400;
+}
+
+.duration {
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
+.detailsRow {
+    margin-bottom: 35px;
+}
+
+.detailItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.8rem;
+    font-weight: 900;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.divider {
+    width: 100%;
+    border-top: 2px dashed rgba(0, 0, 0, 0.15);
+    margin: 15px 0 35px;
+}
+
+.ctaButton {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    background: #000;
+    color: white;
+    text-align: center;
+    border: none;
+    border-radius: 14px;
+    font-weight: 900;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 10px 0 25px;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+}
+
+.ratingBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 20px;
+}
+
+.stars {
+    display: flex;
+    gap: 2px;
+    color: #000000;
+}
+
+.ratingValue {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.featuresArea {
+    padding: 45px 15px 25px 15px;
+}
+
+.featureItem {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 800;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    line-height: 1.5;
+}
+
+.featureItem:last-child {
+    border-bottom: none;
+}
+
+.checkBullet {
+    width: 22px;
+    height: 22px;
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+@media (max-width: 1100px) {
+    .grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .cardFeatured {
+        grid-column: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .section {
+        padding: 80px 0;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .innerBox {
+        padding: 25px 20px;
+        min-height: auto;
+    }
+
+    .title {
+        font-size: 2.5rem;
+    }
+
+    .price {
+        font-size: 5rem;
+    }
+
+    .currency {
+        font-size: 3rem;
+    }
+
+    .header {
+        margin-bottom: 40px;
+    }
+}

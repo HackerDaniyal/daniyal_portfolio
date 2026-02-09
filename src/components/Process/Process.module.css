@@ -1,0 +1,267 @@
+.section {
+    padding: 160px 0;
+    background: var(--background);
+    position: relative;
+    overflow: hidden;
+}
+
+.gridOverlay {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(circle at center, black, transparent 80%);
+    pointer-events: none;
+}
+
+.bgText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 25vw;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.01);
+    pointer-events: none;
+    z-index: 1;
+    font-family: var(--font-heading);
+    white-space: nowrap;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 120px;
+    position: relative;
+    z-index: 2;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    background: rgba(255, 140, 0, 0.05);
+    border: 1px solid rgba(255, 140, 0, 0.1);
+    color: var(--primary);
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    margin-bottom: 30px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background: var(--primary);
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--primary);
+}
+
+.title {
+    font-size: 5.5rem;
+    font-weight: 800;
+    font-family: var(--font-heading);
+    color: var(--foreground);
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    margin: 0 auto;
+}
+
+.highlight {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--primary);
+}
+
+.timelineContainer {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    z-index: 2;
+}
+
+.lineBase {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(255, 140, 0, 0.1);
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+.lineProgress {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--primary);
+    transform: translateX(-50%);
+    pointer-events: none;
+    box-shadow: 0 0 15px var(--primary);
+}
+
+.stepsWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+}
+
+.stepContainer {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+.odd {
+    justify-content: flex-start;
+}
+
+.even {
+    justify-content: flex-end;
+}
+
+.nodeWrapper {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.node {
+    width: 16px;
+    height: 16px;
+    background: var(--background);
+    border: 3px solid var(--primary);
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(255, 140, 0, 0.4);
+}
+
+.stepContent {
+    width: 45%;
+    position: relative;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 60px;
+    border-radius: 40px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 140, 0, 0.3);
+}
+
+.stepNumber {
+    position: absolute;
+    top: -20px;
+    right: 20px;
+    font-size: 10rem;
+    font-weight: 900;
+    font-family: var(--font-heading);
+    color: white;
+    opacity: 0.05;
+    pointer-events: none;
+}
+
+.iconBox {
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 140, 0, 0.1);
+    color: var(--primary);
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 35px;
+    position: relative;
+}
+
+.iconGlow {
+    position: absolute;
+    inset: -10px;
+    background: radial-gradient(circle, rgba(255, 140, 0, 0.2), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+.card:hover .iconGlow {
+    opacity: 1;
+}
+
+.stepTitle {
+    font-size: 2.2rem;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    color: var(--foreground);
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+}
+
+.stepDesc {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+}
+
+.cardGlow {
+    position: absolute;
+    bottom: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(255, 140, 0, 0.05), transparent 70%);
+    pointer-events: none;
+}
+
+@media (max-width: 1024px) {
+    .title {
+        font-size: 4rem;
+    }
+
+    .stepContent {
+        width: 42%;
+    }
+}
+
+@media (max-width: 768px) {
+    .section {
+        padding: 100px 0;
+    }
+
+    .title {
+        font-size: 3rem;
+    }
+
+    .svgPath,
+    .nodeWrapper,
+    .lineBase,
+    .lineProgress {
+        display: none;
+    }
+
+    .stepContent {
+        width: 100%;
+    }
+
+    .card {
+        padding: 40px;
+    }
+
+    .stepNumber {
+        font-size: 6rem;
+    }
+}

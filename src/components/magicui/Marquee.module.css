@@ -1,0 +1,21 @@
+.container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.content {
+    display: flex;
+    gap: 2rem;
+    padding: 10px 0;
+}
+
+.row {
+    display: flex;
+    gap: 2rem;
+    flex-shrink: 0;
+}
+
+.container:hover .content {
+    animation-play-state: paused;
+}
