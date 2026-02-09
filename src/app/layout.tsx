@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title: "Daniyal Alam | Portfolio",
   description: "Web Designer specializing in WordPress & Elementor",
   icons: {
-    icon: "/assets/log.png",
+    icon: "/assets/logo.png",
   },
 };
 
