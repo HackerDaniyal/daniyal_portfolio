@@ -33,20 +33,21 @@ export default function GSAPProvider({ children }: { children: React.ReactNode }
         // });
 
         // 2. Animate Headers and Titles (Cinematic Fade In)
-        const headers = gsap.utils.toArray<HTMLElement>("h2, h3, .section-header");
+        const headers = gsap.utils.toArray<HTMLElement>("h2:not(.hero-title), h3, .section-header");
         headers.forEach((header) => {
             gsap.fromTo(
                 header,
-                { opacity: 0, scale: 0.95, filter: "blur(10px)" },
+                { opacity: 0, scale: 0.98, filter: "blur(5px)" },
                 {
                     opacity: 1,
                     scale: 1,
                     filter: "blur(0px)",
-                    duration: 1.5,
-                    ease: "power3.out",
+                    duration: 0.8,
+                    overwrite: "auto",
+                    ease: "power2.out",
                     scrollTrigger: {
                         trigger: header,
-                        start: "top 90%",
+                        start: "top 95%",
                         toggleActions: "play none none none",
                     },
                 }
@@ -54,20 +55,21 @@ export default function GSAPProvider({ children }: { children: React.ReactNode }
         });
 
         // 3. Animate Staggered Cards (if they exist)
-        const cards = gsap.utils.toArray<HTMLElement>(".magic-card, .service-card, [class*='card']");
+        const cards = gsap.utils.toArray<HTMLElement>(".magic-card, .service-card");
         if (cards.length > 0) {
             gsap.fromTo(
                 cards,
-                { opacity: 0, y: 30 },
+                { opacity: 0, y: 20 },
                 {
                     opacity: 1,
                     y: 0,
-                    duration: 0.8,
-                    stagger: 0.1,
-                    ease: "back.out(1.2)",
+                    duration: 0.5,
+                    stagger: 0.05,
+                    overwrite: "auto",
+                    ease: "power1.out",
                     scrollTrigger: {
                         trigger: cards[0],
-                        start: "top 85%",
+                        start: "top 90%",
                         toggleActions: "play none none none",
                     },
                 }

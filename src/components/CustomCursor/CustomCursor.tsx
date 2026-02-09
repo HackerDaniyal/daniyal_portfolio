@@ -20,36 +20,29 @@ const CustomCursor = () => {
             cursorY.set(e.clientY);
         };
 
-        const handleMouseEnter = (e: any) => {
+        const handleInteraction = (e: MouseEvent) => {
             const target = e.target as HTMLElement;
-            if (target.tagName === 'A' || target.closest('a')) {
-                setHoverType('link');
-            } else if (target.tagName === 'BUTTON' || target.closest('button')) {
-                setHoverType('button');
+            const interactiveEl = target.closest('a, button, [role="button"], input, select, textarea, .clickable');
+
+            if (interactiveEl) {
+                if (interactiveEl.tagName === 'A' || interactiveEl.closest('a')) {
+                    setHoverType('link');
+                } else if (interactiveEl.tagName === 'BUTTON' || interactiveEl.closest('button')) {
+                    setHoverType('button');
+                } else {
+                    setHoverType('interactive');
+                }
             } else {
-                setHoverType('interactive');
+                setHoverType(null);
             }
         };
 
-        const handleMouseLeave = () => setHoverType(null);
-
-        window.addEventListener("mousemove", moveCursor);
-
-        const clickables = document.querySelectorAll(
-            'a, button, [role="button"], input, select, textarea, .clickable'
-        );
-
-        clickables.forEach((el) => {
-            el.addEventListener("mouseenter", handleMouseEnter);
-            el.addEventListener("mouseleave", handleMouseLeave);
-        });
+        window.addEventListener("mousemove", moveCursor, { passive: true });
+        window.addEventListener("mouseover", handleInteraction);
 
         return () => {
             window.removeEventListener("mousemove", moveCursor);
-            clickables.forEach((el) => {
-                el.removeEventListener("mouseenter", handleMouseEnter);
-                el.removeEventListener("mouseleave", handleMouseLeave);
-            });
+            window.removeEventListener("mouseover", handleInteraction);
         };
     }, [cursorX, cursorY]);
 

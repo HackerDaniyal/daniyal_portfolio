@@ -25,7 +25,7 @@ export interface DottedMapProps extends React.SVGProps<SVGSVGElement> {
 export function DottedMap({
     width = 150,
     height = 75,
-    mapSamples = 12000,
+    mapSamples = 8000,
     markers = [],
     markerColor = "#FF8c00",
     dotRadius = 0.12,
