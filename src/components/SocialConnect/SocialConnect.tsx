@@ -27,7 +27,7 @@ export default function SocialConnect() {
                         </p>
 
                         <a
-                            href="https://tiktok.com/@wordpress_wallah"
+                            href="https://www.tiktok.com/tag/wordpess_wallah"
                             target="_blank"
                             rel="noopener noreferrer"
                             className={styles.ctaButton}

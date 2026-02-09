@@ -57,9 +57,9 @@ export default function Footer() {
                         <div className={styles.linkColumn}>
                             <h3 className={styles.colTitle}>Connect</h3>
                             <Link href="#contact" className={styles.link}>Contact</Link>
-                            <a href="mailto:hello@daniyal.design" className={styles.link}>Email</a>
+                            <a href="mailto:daniyalalam.uk9@gmail.com" className={styles.link}>Email</a>
+                            <a href="https://www.tiktok.com/tag/wordpess_wallah" target="_blank" className={styles.link}>TikTok</a>
                             <a href="https://linkedin.com" target="_blank" className={styles.link}>LinkedIn</a>
-                            <a href="https://github.com" target="_blank" className={styles.link}>GitHub</a>
                         </div>
                     </div>
                 </div>
