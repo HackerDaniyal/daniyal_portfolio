@@ -157,7 +157,7 @@ export default function Contact() {
                                 >
                                     {status === 'LOADING' ? (
                                         <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                            <Loader2 size={18} className="animate-spin" /> Sending...
+                                            <Loader2 size={18} className={styles.spinner} /> Sending...
                                         </span>
                                     ) : (
                                         "Submit"
