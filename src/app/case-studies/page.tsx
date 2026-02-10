@@ -1,46 +1,84 @@
 "use client";
 
+import { motion } from "framer-motion";
+import Image from "next/image";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
+import { allProjects } from "@/lib/projects";
 import styles from "../resources.module.css";
-
-const cases = [
-    {
-        title: "FinTech Dashboard Redesign",
-        category: "UI/UX Design",
-        desc: "Complete overhaul of a legacy financial platform, resulting in a 40% increase in user engagement."
-    },
-    {
-        title: "E-Commerce for Luxury Fashion",
-        category: "Development",
-        desc: "Custom Shopify Plus storefront with headless architecture using Next.js for a premium fashion brand."
-    },
-    {
-        title: "AI Startup Landing Page",
-        category: "Web Design",
-        desc: "High-converting landing page with 3D interactive elements for a Series A funded AI startup."
-    }
-];
 
 export default function CaseStudiesPage() {
     return (
-        <main>
+        <main style={{ background: '#080808' }}>
             <Navbar />
+
             <div className={styles.container}>
-                <h1 className={styles.title}>Case Studies</h1>
-                <p className={styles.subtitle}>A selection of my recent work and the stories behind them.</p>
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                >
+                    <h1 className={styles.title}>Case Studies</h1>
+                    <p className={styles.subtitle}>
+                        A deep dive into the technical challenges and strategic solutions behind my most impactful projects.
+                    </p>
+                </motion.div>
 
                 <div className={styles.grid}>
-                    {cases.map((study, i) => (
-                        <div key={i} className={styles.card}>
-                            <span style={{ fontSize: '0.8rem', color: 'var(--primary)', fontWeight: '600', display: 'block', marginBottom: '8px' }}>{study.category}</span>
-                            <h2 className={styles.cardTitle}>{study.title}</h2>
-                            <p className={styles.cardText}>{study.desc}</p>
-                            <a href="#" className={styles.cardLink}>View Case Study →</a>
-                        </div>
+                    {allProjects.map((project, i) => (
+                        <motion.div
+                            key={project.slug}
+                            className={styles.card}
+                            initial={{ opacity: 0, y: 40 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.8, delay: i * 0.1 }}
+                        >
+                            <div className={styles.cardContent}>
+                                <div className={styles.cardHeader}>
+                                    <span className={styles.cardCategory}>{project.category}</span>
+                                    <h2 className={styles.cardTitle}>{project.title}</h2>
+                                </div>
+
+                                <div className={styles.cardDetails}>
+                                    <div className={styles.detailItem}>
+                                        <span className={styles.detailLabel}>The Challenge</span>
+                                        <p className={styles.detailText}>{project.challenge}</p>
+                                    </div>
+                                    <div className={styles.detailItem}>
+                                        <span className={styles.detailLabel}>The Solution</span>
+                                        <p className={styles.detailText}>{project.solution}</p>
+                                    </div>
+                                    <div className={styles.resultsBox}>
+                                        <span className={styles.detailLabel} style={{ color: 'var(--primary)' }}>Key Results</span>
+                                        <p className={styles.resultsText}>{project.results}</p>
+                                    </div>
+                                </div>
+
+                                <a
+                                    href={project.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={styles.cardLink}
+                                    style={{ textDecoration: 'none', borderBottom: '1px solid currentColor', width: 'fit-content' }}
+                                >
+                                    Visit Live Site →
+                                </a>
+                            </div>
+
+                            <div className={styles.cardImageWrapper}>
+                                <Image
+                                    src={project.image}
+                                    alt={project.title}
+                                    fill
+                                    className={styles.cardImage}
+                                />
+                            </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>
+
             <Footer />
         </main>
     );
