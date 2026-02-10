@@ -18,23 +18,48 @@ const WorldMap = dynamic(() => import("@/components/WorldMap/WorldMap"), { ssr: 
 const Contact = dynamic(() => import("@/components/Contact/Contact"));
 const Footer = dynamic(() => import("@/components/Footer/Footer"));
 
+import { useState, useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import Loading from "@/components/Loading/Loading";
+
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Lock scroll during loading
+  useEffect(() => {
+    if (isLoading) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [isLoading]);
+
   return (
-    <main>
-      <Navbar />
-      <Hero />
-      <ServiceMarquee />
-      <About />
-      <WhatIDo />
-      <Process />
-      <Portfolio />
-      <Pricing />
-      <Testimonials />
-      <FAQ />
-      <LogoMarquee />
-      <WorldMap />
-      <Contact />
-      <Footer />
-    </main>
+    <>
+      <AnimatePresence mode="wait">
+        {isLoading && <Loading onComplete={() => setIsLoading(false)} />}
+      </AnimatePresence>
+
+      <motion.main
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isLoading ? 0 : 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        <Navbar />
+        <Hero />
+        <ServiceMarquee />
+        <About />
+        <WhatIDo />
+        <Process />
+        <Portfolio />
+        <Pricing />
+        <Testimonials />
+        <FAQ />
+        <LogoMarquee />
+        <WorldMap />
+        <Contact />
+        <Footer />
+      </motion.main>
+    </>
   );
 }
