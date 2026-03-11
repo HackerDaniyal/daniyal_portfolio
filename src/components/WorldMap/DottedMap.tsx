@@ -33,6 +33,8 @@ export function DottedMap({
     className,
     style,
 }: DottedMapProps) {
+    const canvasRef = React.useRef<HTMLCanvasElement>(null);
+    
     const { points, addMarkers } = React.useMemo(() => {
         const map = createMap({
             width,
@@ -70,109 +72,120 @@ export function DottedMap({
         return { xStep: step || 1, yToRowIndex: rowMap };
     }, [points]);
 
-    return (
-        <div style={{ position: 'relative' }}>
-            <style>
-                {`
-                    @keyframes twinkle {
-                        0%, 100% { opacity: 0.3; }
-                        50% { opacity: 0.8; filter: brightness(1.5) blur(0.5px); }
-                    }
-                    .shimmer-dot {
-                        animation: twinkle 4s infinite ease-in-out;
-                    }
-                `}
-            </style>
-            <svg
-                viewBox={`0 0 ${width} ${height}`}
-                className={cn("text-white/40", className)}
-                style={{
-                    width: "100%",
-                    height: "100%",
-                    maskImage: 'radial-gradient(circle at center, black 75%, transparent 100%)',
-                    WebkitMaskImage: 'radial-gradient(circle at center, black 75%, transparent 100%)',
-                    filter: 'drop-shadow(0 0 0.5px rgba(255,255,255,0.2))',
-                    ...style
-                }}
-            >
-                {points.map((point, index) => {
-                    const rowIndex = yToRowIndex.get(point.y) ?? 0;
-                    const offsetX = stagger && rowIndex % 2 === 1 ? xStep / 2 : 0;
-                    const isShimmer = (point.x + point.y) % 13 === 0;
+    React.useEffect(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const ctx = canvas.getContext("2d", { alpha: true });
+        if (!ctx) return;
 
-                    return (
-                        <circle
-                            cx={point.x + offsetX}
-                            cy={point.y}
-                            r={dotRadius}
-                            fill="currentColor"
-                            key={`${point.x}-${point.y}-${index}`}
-                            className={isShimmer ? "shimmer-dot" : ""}
-                            style={{
-                                opacity: isShimmer ? undefined : 0.4 + (Math.random() * 0.2),
-                                animationDelay: isShimmer ? `${Math.random() * 5}s` : undefined
-                            }}
-                        />
-                    );
-                })}
-                {processedMarkers.map((marker, index) => {
-                    const rowIndex = yToRowIndex.get(marker.y) ?? 0;
-                    const offsetX = stagger && rowIndex % 2 === 1 ? xStep / 2 : 0;
-                    return (
-                        <g key={`${marker.x}-${marker.y}-${index}`}>
-                            {/* Outer Pulse */}
-                            <circle
-                                cx={marker.x + offsetX}
-                                cy={marker.y}
-                                r={markers[index].size ? markers[index].size! * 2.5 : dotRadius * 5}
-                                fill={markerColor}
-                                opacity="0.2"
-                            >
-                                <animate
-                                    attributeName="r"
-                                    values={`${markers[index].size || dotRadius * 2};${(markers[index].size || dotRadius * 2) * 3};${markers[index].size || dotRadius * 2}`}
-                                    dur="2s"
-                                    repeatCount="indefinite"
-                                />
-                                <animate
-                                    attributeName="opacity"
-                                    values="0.4;0;0.4"
-                                    dur="2s"
-                                    repeatCount="indefinite"
-                                />
-                            </circle>
-                            {/* Core Dot */}
-                            <circle
-                                cx={marker.x + offsetX}
-                                cy={marker.y}
-                                r={markers[index].size ?? dotRadius * 1.5}
-                                fill={markerColor}
-                                style={{
-                                    filter: `drop-shadow(0 0 4px ${markerColor}) drop-shadow(0 0 10px ${markerColor})`,
-                                }}
-                            />
-                            {/* Country Label */}
-                            <text
-                                x={marker.x + offsetX}
-                                y={marker.y + (markers[index].size ? markers[index].size! * 2.5 : dotRadius * 6) + 3}
-                                fill="#fff"
-                                fontSize="1.6"
-                                fontWeight="500"
-                                textAnchor="middle"
-                                style={{
-                                    pointerEvents: 'none',
-                                    userSelect: 'none',
-                                    textShadow: '0 1px 2px rgba(0,0,0,0.8)',
-                                    fontFamily: 'var(--font-heading)',
-                                    letterSpacing: '0.02em'
-                                }}
-                            >
-                                {marker.name}
-                            </text>
-                        </g>
-                    );
-                })}
-            </svg>
+        // Use high DPI for crisp rendering
+        const dpr = window.devicePixelRatio || 1;
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.scale(dpr, dpr);
+
+        // Map dimensions to canvas size
+        const scaleX = rect.width / width;
+        const scaleY = rect.height / height;
+
+        let animationFrameId: number;
+        let startTime = Date.now();
+
+        // Pre-randomize shimmers to avoid Math.random in loop
+        const shimmers = points.map((p) => (p.x + p.y) % 13 === 0);
+        const randomOffsets = points.map(() => Math.random());
+
+        const render = () => {
+            const now = Date.now();
+            const elapsed = (now - startTime) / 1000;
+            
+            ctx.clearRect(0, 0, rect.width, rect.height);
+
+            // Draw Points
+            ctx.fillStyle = "rgba(255, 255, 255, 0.4)";
+            points.forEach((point, i) => {
+                const rowIndex = yToRowIndex.get(point.y) ?? 0;
+                const offsetX = stagger && rowIndex % 2 === 1 ? xStep / 2 : 0;
+                const isShimmer = shimmers[i];
+                
+                let opacity = 0.4 + (randomOffsets[i] * 0.2);
+                
+                if (isShimmer) {
+                    // Twinkle animation logic
+                    const twinkle = Math.sin((elapsed + randomOffsets[i] * 5) * 1.5);
+                    opacity = 0.3 + (twinkle + 1) * 0.25; // Range 0.3 to 0.8
+                }
+
+                ctx.globalAlpha = opacity;
+                ctx.beginPath();
+                ctx.arc((point.x + offsetX) * scaleX, point.y * scaleY, dotRadius * scaleX, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // Draw Markers
+            ctx.globalAlpha = 1;
+            processedMarkers.forEach((marker, i) => {
+                const rowIndex = yToRowIndex.get(marker.y) ?? 0;
+                const offsetX = stagger && rowIndex % 2 === 1 ? xStep / 2 : 0;
+                const mX = (marker.x + offsetX) * scaleX;
+                const mY = marker.y * scaleY;
+                const mSize = (markers[i].size || dotRadius * 1.5) * scaleX;
+
+                // Pulse Effect
+                const pulse = Math.sin(elapsed * 3) * 0.5 + 0.5;
+                const pulseRadius = mSize * (1 + pulse * 2);
+                const pulseOpacity = 0.2 * (1 - pulse);
+
+                ctx.fillStyle = markerColor;
+                
+                // Outer Pulse Blur Simulation
+                ctx.beginPath();
+                ctx.globalAlpha = pulseOpacity;
+                ctx.arc(mX, mY, pulseRadius, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Core Dot
+                ctx.globalAlpha = 1;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = markerColor;
+                ctx.beginPath();
+                ctx.arc(mX, mY, mSize, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.shadowBlur = 0;
+
+                // Text Label
+                ctx.fillStyle = "white";
+                ctx.font = `600 ${Math.max(10, scaleX * 1.6)}px Outfit, sans-serif`;
+                ctx.textAlign = "center";
+                ctx.fillText(marker.name, mX, mY + mSize * 3 + 4);
+            });
+
+            animationFrameId = requestAnimationFrame(render);
+        };
+
+        render();
+
+        return () => cancelAnimationFrame(animationFrameId);
+    }, [points, processedMarkers, stagger, xStep, yToRowIndex, width, height, dotRadius, markerColor, markers]);
+
+    return (
+        <div 
+            className={cn("relative w-full h-full", className)}
+            style={{
+                maskImage: 'radial-gradient(circle at center, black 75%, transparent 100%)',
+                WebkitMaskImage: 'radial-gradient(circle at center, black 75%, transparent 100%)',
+                ...style
+            }}
+        >
+            <canvas
+                ref={canvasRef}
+                style={{
+                    width: '100%',
+                    height: '100%',
+                    display: 'block'
+                }}
+            />
         </div>
     );
 }

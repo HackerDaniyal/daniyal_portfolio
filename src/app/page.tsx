@@ -25,12 +25,17 @@ import Loading from "@/components/Loading/Loading";
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
-  // Lock scroll during loading
+  // Lock scroll during loading and trigger ready event
   useEffect(() => {
     if (isLoading) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
+      // Trigger global ready signal after a small delay to ensure exit animation has room
+      const timer = setTimeout(() => {
+        window.dispatchEvent(new CustomEvent("app-ready"));
+      }, 100);
+      return () => clearTimeout(timer);
     }
   }, [isLoading]);
 

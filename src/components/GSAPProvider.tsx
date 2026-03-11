@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -9,28 +9,16 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function GSAPProvider({ children }: { children: React.ReactNode }) {
     const mainRef = useRef<HTMLDivElement>(null);
+    const [isReady, setIsReady] = useState(false);
+
+    useEffect(() => {
+        const handleReady = () => setIsReady(true);
+        window.addEventListener("app-ready", handleReady);
+        return () => window.removeEventListener("app-ready", handleReady);
+    }, []);
 
     useGSAP(() => {
-        // 1. Animate Sections (Staggered Entrance)
-        // 1. Animate Sections (Staggered Entrance) - DISABLED TO FIX PREMATURE HIDING
-        // const sections = gsap.utils.toArray<HTMLElement>("section");
-        // sections.forEach((section) => {
-        //     gsap.fromTo(
-        //         section,
-        //         { opacity: 0, y: 50 },
-        //         {
-        //             opacity: 1,
-        //             y: 0,
-        //             duration: 1.2,
-        //             ease: "power2.out",
-        //             scrollTrigger: {
-        //                 trigger: section,
-        //                 start: "top 85%",
-        //                 toggleActions: "play none none none",
-        //             },
-        //         }
-        //     );
-        // });
+        if (!isReady) return;
 
         // 2. Animate Headers and Titles (Cinematic Fade In)
         const headers = gsap.utils.toArray<HTMLElement>("h2:not(.hero-title), h3, .section-header");
@@ -75,7 +63,7 @@ export default function GSAPProvider({ children }: { children: React.ReactNode }
                 }
             );
         }
-    }, { scope: mainRef });
+    }, { scope: mainRef, dependencies: [isReady] });
 
     return (
         <div ref={mainRef} className="gsap-wrapper">
