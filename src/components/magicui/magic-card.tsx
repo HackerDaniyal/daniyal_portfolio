@@ -21,11 +21,20 @@ export const MagicCard = ({
     // Sanitize ID for use in URL
     const filterId = `magic-card-blur-${id.replace(/:/g, '')}`;
 
+    const rectRef = useRef<DOMRect | null>(null);
+
+    const handleMouseEnter = () => {
+        const card = cardRef.current;
+        if (card) {
+            rectRef.current = card.getBoundingClientRect();
+        }
+    };
+
     const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
         const card = cardRef.current;
-        if (!card) return;
+        const rect = rectRef.current;
+        if (!card || !rect) return;
 
-        const rect = card.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
 
@@ -51,6 +60,7 @@ export const MagicCard = ({
     return (
         <article
             ref={cardRef}
+            onMouseEnter={handleMouseEnter}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             className={cn(styles.card, className)}

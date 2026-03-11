@@ -104,10 +104,10 @@ export default function Loading({ onComplete }: { onComplete: () => void }) {
                         <AnimatePresence mode="wait">
                             <motion.h2
                                 key={valueIndex}
-                                initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
-                                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                                exit={{ opacity: 0, y: -20, filter: "blur(8px)" }}
-                                transition={{ duration: 0.35, ease: "circOut" }}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.3, ease: "circOut" }}
                                 className={styles.valueText}
                             >
                                 {BRAND_VALUES[valueIndex]}

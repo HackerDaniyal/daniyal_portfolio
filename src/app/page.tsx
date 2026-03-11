@@ -42,29 +42,32 @@ export default function Home() {
   return (
     <>
       <AnimatePresence mode="wait">
-        {isLoading && <Loading onComplete={() => setIsLoading(false)} />}
+        {isLoading ? (
+          <Loading key="loader" onComplete={() => setIsLoading(false)} />
+        ) : (
+          <motion.main
+            key="main-content"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <Navbar />
+            <Hero />
+            <ServiceMarquee />
+            <About />
+            <WhatIDo />
+            <Process />
+            <Portfolio />
+            <Pricing />
+            <Testimonials />
+            <FAQ />
+            <LogoMarquee />
+            <WorldMap />
+            <Contact />
+            <Footer />
+          </motion.main>
+        )}
       </AnimatePresence>
-
-      <motion.main
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isLoading ? 0 : 1 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-      >
-        <Navbar />
-        <Hero />
-        <ServiceMarquee />
-        <About />
-        <WhatIDo />
-        <Process />
-        <Portfolio />
-        <Pricing />
-        <Testimonials />
-        <FAQ />
-        <LogoMarquee />
-        <WorldMap />
-        <Contact />
-        <Footer />
-      </motion.main>
     </>
   );
 }

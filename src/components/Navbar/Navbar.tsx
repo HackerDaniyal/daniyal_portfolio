@@ -15,29 +15,38 @@ const Navbar = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
-
-            // Update active section based on scroll position
-            const sections = ["home", "about", "services", "process", "presence", "testimonials", "contact"];
-            const current = sections.find(section => {
-                const element = document.getElementById(section);
-                if (element) {
-                    const rect = element.getBoundingClientRect();
-                    // Using a threshold to detect active section
-                    return rect.top <= 100 && rect.bottom >= 100;
-                }
-                return false;
-            });
-
-            if (current) {
-                setActiveSection(current);
-            }
+            setScrolled(window.scrollY > 20);
         };
 
-        window.addEventListener("scroll", handleScroll);
-        // Initial call
+        // Use IntersectionObserver for a high-performance active section detection
+        const sections = ["home", "about", "services", "process", "presence", "testimonials", "contact"];
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -70% 0px', // Trigger when 20%-30% into the viewport
+            threshold: 0
+        };
+
+        const observerCallback = (entries: IntersectionObserverEntry[]) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setActiveSection(entry.target.id);
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+        sections.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) observer.observe(el);
+        });
+
+        window.addEventListener("scroll", handleScroll, { passive: true });
         handleScroll();
-        return () => window.removeEventListener("scroll", handleScroll);
+        
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            observer.disconnect();
+        };
     }, []);
 
     const navLinks = [
