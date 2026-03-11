@@ -95,41 +95,21 @@ export default function Hero() {
             </div>
 
             {/* Decorative logos from image with floating motion */}
-            <motion.div
-                className={`${styles.icon} ${styles.logoIcon} ${styles.icon1}`}
-                animate={{ y: [0, -15, 0], rotate: [-15, -10, -15] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            >
-                <Image src="https://cdn.simpleicons.org/figma" alt="Figma" width={40} height={40} unoptimized />
-            </motion.div>
-            <motion.div
-                className={`${styles.icon} ${styles.logoIcon} ${styles.icon2}`}
-                animate={{ y: [0, 15, 0], rotate: [15, 20, 15] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-            >
-                <Image src="https://cdn.simpleicons.org/wordpress" alt="WordPress" width={40} height={40} unoptimized />
-            </motion.div>
-            <motion.div
-                className={`${styles.icon} ${styles.logoIcon} ${styles.icon3}`}
-                animate={{ y: [0, -20, 0], rotate: [10, 5, 10] }}
-                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            >
-                <Image src="https://cdn.simpleicons.org/elementor" alt="Elementor" width={40} height={40} unoptimized />
-            </motion.div>
-            <motion.div
-                className={`${styles.icon} ${styles.logoIcon} ${styles.icon4}`}
-                animate={{ y: [0, 20, 0], rotate: [-10, -5, -10] }}
-                transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
-            >
-                <Image src="https://cdn.simpleicons.org/woocommerce" alt="WooCommerce" width={40} height={40} unoptimized />
-            </motion.div>
-            <motion.div
-                className={`${styles.icon} ${styles.logoIcon} ${styles.icon5}`}
-                animate={{ y: [0, -10, 0], rotate: [-5, 0, -5] }}
-                transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-            >
-                <Image src="https://cdn.simpleicons.org/shopify" alt="Shopify" width={40} height={40} unoptimized />
-            </motion.div>
+            <div className={`${styles.icon} ${styles.logoIcon} ${styles.icon1}`}>
+                <Image src="/assets/icons/figma.svg" alt="Figma" width={40} height={40} />
+            </div>
+            <div className={`${styles.icon} ${styles.logoIcon} ${styles.icon2}`}>
+                <Image src="/assets/icons/wordpress.svg" alt="WordPress" width={40} height={40} />
+            </div>
+            <div className={`${styles.icon} ${styles.logoIcon} ${styles.icon3}`}>
+                <Image src="/assets/icons/elementor.svg" alt="Elementor" width={40} height={40} />
+            </div>
+            <div className={`${styles.icon} ${styles.logoIcon} ${styles.icon4}`}>
+                <Image src="/assets/icons/woocommerce.svg" alt="WooCommerce" width={40} height={40} />
+            </div>
+            <div className={`${styles.icon} ${styles.logoIcon} ${styles.icon5}`}>
+                <Image src="/assets/icons/shopify.svg" alt="Shopify" width={40} height={40} />
+            </div>
         </section>
     );
 }

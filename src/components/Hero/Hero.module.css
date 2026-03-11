@@ -173,6 +173,7 @@
     position: absolute;
     z-index: 5;
     pointer-events: none;
+    will-change: transform;
 }
 
 .logoIcon {
@@ -199,31 +200,56 @@
 .icon1 {
     top: 15%;
     left: 10%;
-    transform: rotate(-15deg);
+    animation: float1 5s ease-in-out infinite;
 }
 
 .icon2 {
     top: 10%;
     right: 10%;
-    transform: rotate(15deg);
+    animation: float2 6s ease-in-out infinite 0.5s;
 }
 
 .icon3 {
     bottom: 20%;
     left: 8%;
-    transform: rotate(10deg);
+    animation: float3 7s ease-in-out infinite 1s;
 }
 
 .icon4 {
     bottom: 15%;
     right: 12%;
-    transform: rotate(-10deg);
+    animation: float4 5.5s ease-in-out infinite 1.5s;
 }
 
 .icon5 {
     bottom: 5%;
     left: 20%;
-    transform: rotate(-5deg);
+    animation: float5 6.5s ease-in-out infinite 2s;
+}
+
+@keyframes float1 {
+    0%, 100% { transform: translateY(0) rotate(-15deg); }
+    50% { transform: translateY(-15px) rotate(-10deg); }
+}
+
+@keyframes float2 {
+    0%, 100% { transform: translateY(0) rotate(15deg); }
+    50% { transform: translateY(15px) rotate(20deg); }
+}
+
+@keyframes float3 {
+    0%, 100% { transform: translateY(0) rotate(10deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+@keyframes float4 {
+    0%, 100% { transform: translateY(0) rotate(-10deg); }
+    50% { transform: translateY(20px) rotate(-5deg); }
+}
+
+@keyframes float5 {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-10px) rotate(0deg); }
 }
 
 @media (max-width: 768px) {

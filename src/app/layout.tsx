@@ -21,8 +21,7 @@ export const metadata: Metadata = {
   },
 };
 
-import GSAPProvider from "@/components/GSAPProvider";
-import CustomCursor from "@/components/CustomCursor/CustomCursor";
+import ClientProviders from "@/components/ClientProviders";
 
 export default function RootLayout({
   children,
@@ -32,8 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${outfit.variable}`}>
-        <CustomCursor />
-        <GSAPProvider>{children}</GSAPProvider>
+        <ClientProviders>{children}</ClientProviders>
       </body>
     </html>
   );
