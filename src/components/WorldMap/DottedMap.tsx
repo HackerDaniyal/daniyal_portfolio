@@ -72,29 +72,49 @@ export function DottedMap({
         return { xStep: step || 1, yToRowIndex: rowMap };
     }, [points]);
 
+    const staticCanvasRef = React.useRef<HTMLCanvasElement | null>(null);
+
     React.useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
         const ctx = canvas.getContext("2d", { alpha: true });
         if (!ctx) return;
 
-        // Use high DPI for crisp rendering
         const dpr = window.devicePixelRatio || 1;
         const rect = canvas.getBoundingClientRect();
         canvas.width = rect.width * dpr;
         canvas.height = rect.height * dpr;
         ctx.scale(dpr, dpr);
 
-        // Map dimensions to canvas size
         const scaleX = rect.width / width;
         const scaleY = rect.height / height;
 
+        // --- PRE-RENDER STATIC BACKGROUND ---
+        if (!staticCanvasRef.current) {
+            const staticCanvas = document.createElement('canvas');
+            staticCanvas.width = canvas.width;
+            staticCanvas.height = canvas.height;
+            const sCtx = staticCanvas.getContext('2d');
+            if (sCtx) {
+                sCtx.scale(dpr, dpr);
+                sCtx.fillStyle = "rgba(255, 255, 255, 0.4)";
+                points.forEach((point) => {
+                    const rowIndex = yToRowIndex.get(point.y) ?? 0;
+                    const offsetX = stagger && rowIndex % 2 === 1 ? xStep / 2 : 0;
+                    sCtx.beginPath();
+                    sCtx.arc((point.x + offsetX) * scaleX, point.y * scaleY, dotRadius * scaleX, 0, Math.PI * 2);
+                    sCtx.fill();
+                });
+            }
+            staticCanvasRef.current = staticCanvas;
+        }
+
         let animationFrameId: number;
         let startTime = Date.now();
-
-        // Pre-randomize shimmers to avoid Math.random in loop
         const shimmers = points.map((p) => (p.x + p.y) % 13 === 0);
         const randomOffsets = points.map(() => Math.random());
+        // Only keep shimmer points for the loop
+        const shimmerIndices = points.reduce<number[]>((acc, _, i) => shimmers[i] ? [...acc, i] : acc, []);
 
         const render = () => {
             const now = Date.now();
@@ -102,28 +122,27 @@ export function DottedMap({
             
             ctx.clearRect(0, 0, rect.width, rect.height);
 
-            // Draw Points
-            ctx.fillStyle = "rgba(255, 255, 255, 0.4)";
-            points.forEach((point, i) => {
+            // 1. Draw Static Background (1 call instead of 8,000)
+            if (staticCanvasRef.current) {
+                ctx.drawImage(staticCanvasRef.current, 0, 0, rect.width, rect.height);
+            }
+
+            // 2. Draw Shimmers only
+            shimmerIndices.forEach((i) => {
+                const point = points[i];
                 const rowIndex = yToRowIndex.get(point.y) ?? 0;
                 const offsetX = stagger && rowIndex % 2 === 1 ? xStep / 2 : 0;
-                const isShimmer = shimmers[i];
-                
-                let opacity = 0.4 + (randomOffsets[i] * 0.2);
-                
-                if (isShimmer) {
-                    // Twinkle animation logic
-                    const twinkle = Math.sin((elapsed + randomOffsets[i] * 5) * 1.5);
-                    opacity = 0.3 + (twinkle + 1) * 0.25; // Range 0.3 to 0.8
-                }
+                const twinkle = Math.sin((elapsed + randomOffsets[i] * 5) * 1.5);
+                const opacity = 0.3 + (twinkle + 1) * 0.25;
 
                 ctx.globalAlpha = opacity;
+                ctx.fillStyle = "white"; // Make shimmers stand out slightly
                 ctx.beginPath();
                 ctx.arc((point.x + offsetX) * scaleX, point.y * scaleY, dotRadius * scaleX, 0, Math.PI * 2);
                 ctx.fill();
             });
 
-            // Draw Markers
+            // 3. Draw Markers
             ctx.globalAlpha = 1;
             processedMarkers.forEach((marker, i) => {
                 const rowIndex = yToRowIndex.get(marker.y) ?? 0;
@@ -132,20 +151,16 @@ export function DottedMap({
                 const mY = marker.y * scaleY;
                 const mSize = (markers[i].size || dotRadius * 1.5) * scaleX;
 
-                // Pulse Effect
                 const pulse = Math.sin(elapsed * 3) * 0.5 + 0.5;
                 const pulseRadius = mSize * (1 + pulse * 2);
                 const pulseOpacity = 0.2 * (1 - pulse);
 
                 ctx.fillStyle = markerColor;
-                
-                // Outer Pulse Blur Simulation
                 ctx.beginPath();
                 ctx.globalAlpha = pulseOpacity;
                 ctx.arc(mX, mY, pulseRadius, 0, Math.PI * 2);
                 ctx.fill();
 
-                // Core Dot
                 ctx.globalAlpha = 1;
                 ctx.shadowBlur = 10;
                 ctx.shadowColor = markerColor;
@@ -154,7 +169,6 @@ export function DottedMap({
                 ctx.fill();
                 ctx.shadowBlur = 0;
 
-                // Text Label
                 ctx.fillStyle = "white";
                 ctx.font = `600 ${Math.max(10, scaleX * 1.6)}px Outfit, sans-serif`;
                 ctx.textAlign = "center";
@@ -165,8 +179,10 @@ export function DottedMap({
         };
 
         render();
-
-        return () => cancelAnimationFrame(animationFrameId);
+        return () => {
+            cancelAnimationFrame(animationFrameId);
+            staticCanvasRef.current = null;
+        };
     }, [points, processedMarkers, stagger, xStep, yToRowIndex, width, height, dotRadius, markerColor, markers]);
 
     return (
