@@ -1,5 +1,17 @@
 export const allProjects = [
     {
+        slug: "sovash",
+        title: "Sovash",
+        category: "E-Commerce / Beauty",
+        description: "A luxury beauty and skincare platform with a focus on seamless brand storytelling.",
+        challenge: "Sovash needed to translate their high-end retail experience into a digital storefront that felt equally premium and intimate.",
+        solution: "Built a bespoke WooCommerce experience with custom motion-designed product displays and a simplified, high-conversion checkout.",
+        results: "Achieved a 45% increase in mobile sales and created a highly scalable digital foundation for future brand expansion.",
+        image: "/portfolio/sovash.webp",
+        tools: ["WooCommerce", "Luxury UI", "Motion Design"],
+        link: "https://www.sovash.com/"
+    },
+    {
         slug: "nudge",
         title: "Nudge",
         category: "Productivity",
