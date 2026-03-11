@@ -45,7 +45,7 @@ const Navbar = () => {
         { name: "About", anchor: "/#about" },
         { name: "Services", anchor: "/#services" },
         { name: "Process", anchor: "/#process" },
-        { name: "Global", anchor: "/#presence" },
+        { name: "Global Reach", anchor: "/#presence" },
         { name: "Projects", anchor: "/projects" },
         { name: "Testimonials", anchor: "/#testimonials" },
         { name: "Contact", anchor: "/#contact" },
@@ -81,7 +81,7 @@ const Navbar = () => {
                         className={styles.logo}
                     >
                         <Image
-                            src="/assets/log.png"
+                            src="/assets/logo.png"
                             alt="Daniyal Alam"
                             width={400}
                             height={165}

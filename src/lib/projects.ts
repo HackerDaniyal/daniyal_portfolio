@@ -1,5 +1,29 @@
 export const allProjects = [
     {
+        slug: "function-health",
+        title: "Function Health",
+        category: "Health & Wellness",
+        description: "A comprehensive health tracking and data visualization platform.",
+        challenge: "Function Health required a highly secure and intuitive interface to present complex biological data to users in an actionable way.",
+        solution: "Developed a sophisticated data dashboard using custom visualization components and a secure, HIPAA-compliant frontend architecture.",
+        results: "Boosted user engagement by 60% and successfully streamlined the delivery of health insights to thousands of members.",
+        image: "/portfolio/function.png",
+        tools: ["Health-Tech", "Data Visualization", "Premium UX"],
+        link: "https://www.functionhealth.com/"
+    },
+    {
+        slug: "nudge",
+        title: "Nudge",
+        category: "Productivity",
+        description: "Intelligent task management and productivity enhancement tool.",
+        challenge: "Nudge needed to differentiate itself in a crowded productivity market with a focus on 'gentle persistence' and user habit formation.",
+        solution: "Built a sleek, minimalist interface with subtle micro-interactions and a custom notification engine designed for user focus.",
+        results: "Achieved a 4.8-star user rating and helped over 50,000 users improve their daily productivity habits.",
+        image: "/portfolio/nudge.png",
+        tools: ["SaaS", "Productivity", "Micro-interactions"],
+        link: "https://getnudge.info/"
+    },
+    {
         slug: "legacy-nutracare",
         title: "LegacyNutracare",
         category: "E-Commerce",
