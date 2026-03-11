@@ -1,5 +1,17 @@
 export const allProjects = [
     {
+        slug: "warsaw-dental-center",
+        title: "Warsaw Dental Center",
+        category: "Medical / Dental",
+        description: "A flagship digital presence for Poland's premier multi-disciplinary dental clinic.",
+        challenge: "Warsaw Dental Center required an authoritative yet welcoming platform that could effectively manage clinical expertise across multiple specialties.",
+        solution: "Engineered a high-performance, medical-grade web experience featuring advanced service navigation and an emphasis on patient trust and care.",
+        results: "Enhanced digital brand authority and established a clear patient journey for their international client base.",
+        image: "/portfolio/warsawdentalcenter.pl.webp",
+        tools: ["Medical UI", "CMS Integration", "UX Architect"],
+        link: "https://warsawdentalcenter.pl"
+    },
+    {
         slug: "sheer-beauty-care",
         title: "Sheer Beauty Care",
         category: "Beauty / E-Commerce",
