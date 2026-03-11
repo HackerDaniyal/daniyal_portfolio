@@ -1,5 +1,29 @@
 export const allProjects = [
     {
+        slug: "sheer-beauty-care",
+        title: "Sheer Beauty Care",
+        category: "Beauty / E-Commerce",
+        description: "A premium New Zealand-based beauty care platform focused on natural skincare.",
+        challenge: "Sheer Beauty Care needed a digital presence that perfectly mirrored their commitment to organic, high-end skincare products.",
+        solution: "Developed a clean, minimalist storefront with refined typography and high-performance image handling to showcase product purity.",
+        results: "Increased online brand visibility and established a trust-driven digital storefront for their NZ customer base.",
+        image: "/portfolio/httpssheerbeautycare.co.nz.webp",
+        tools: ["E-Commerce", "UI Design", "Performance"],
+        link: "https://sheerbeautycare.co.nz"
+    },
+    {
+        slug: "golden-beauty-canada",
+        title: "Golden Beauty Canada",
+        category: "Beauty / Services",
+        description: "A professional beauty service platform for one of Canada's premier lash and brow studios.",
+        challenge: "The studio needed a high-conversion booking site that emphasized their professional expertise and luxury clinic environment.",
+        solution: "Built a sophisticated service showcase with integrated appointment scheduling and a gallery-focused design to highlight their portfolio.",
+        results: "Significant increase in digital appointment bookings and improved client onboarding efficiency.",
+        image: "/portfolio/goldenbeautycanada.webp",
+        tools: ["Web Design", "Service Portfolio", "CMS"],
+        link: "https://goldenbeautycanada.com/"
+    },
+    {
         slug: "sovash",
         title: "Sovash",
         category: "E-Commerce / Beauty",
