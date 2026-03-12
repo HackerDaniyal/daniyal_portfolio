@@ -310,9 +310,11 @@
     flex-shrink: 0;
 }
 
+/* ---------- 1100px – 2-column tablet ---------- */
 @media (max-width: 1100px) {
     .grid {
         grid-template-columns: 1fr 1fr;
+        padding: 20px;
     }
 
     .cardFeatured {
@@ -320,43 +322,132 @@
     }
 }
 
+/* ---------- 768px – full mobile ---------- */
 @media (max-width: 768px) {
     .section {
-        padding: 80px 0;
+        padding: 70px 0;
         overflow: hidden;
     }
 
-    .grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-        padding: 40px 16px 20px 16px;
+    .header {
+        margin-bottom: 32px;
+        padding: 0 16px;
     }
 
+    .title {
+        font-size: clamp(2rem, 8vw, 2.8rem);
+        margin-top: 16px;
+    }
+
+    .subtext {
+        font-size: 0.95rem;
+    }
+
+    /* Single-column grid with room for floating badge at top */
+    .grid {
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+        padding: 44px 16px 24px;
+    }
+
+    /* Every card takes full width */
     .card {
         width: 100%;
         max-width: 100%;
         box-sizing: border-box;
+        border-radius: 28px;
+        overflow: visible;   /* keep badge visible */
+    }
+
+    /* Floating badge – push it slightly left on very narrow screens */
+    .avatarBadge {
+        right: 4px;
     }
 
     .innerBox {
-        padding: 25px 20px;
+        border-radius: 22px;
+        padding: 24px 18px;
         min-height: auto;
     }
 
-    .title {
-        font-size: 2.5rem;
+    /* Pill header row */
+    .pillHeader {
+        padding: 12px 16px;
+        margin-bottom: 24px;
     }
 
-    .price {
-        font-size: 5rem;
+    .planName {
+        font-size: 1.25rem;
+    }
+
+    /* Price numbers */
+    .priceSection {
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        gap: 2px;
     }
 
     .currency {
-        font-size: 3rem;
+        font-size: clamp(2rem, 7vw, 2.8rem);
     }
 
-    .header {
-        margin-bottom: 40px;
-        padding: 0 16px;
+    .price {
+        font-size: clamp(3.5rem, 14vw, 5.5rem);
+    }
+
+    .duration {
+        font-size: 1.2rem;
+    }
+
+    /* Details row */
+    .detailsRow {
+        margin-bottom: 20px;
+    }
+
+    .detailItem {
+        font-size: 0.75rem;
+        gap: 8px;
+    }
+
+    /* CTA button */
+    .ctaButton {
+        padding: 14px;
+        font-size: 0.9rem;
+        margin: 8px 0 18px;
+    }
+
+    /* Features list */
+    .featuresArea {
+        padding: 28px 10px 18px;
+    }
+
+    .featureItem {
+        font-size: 0.8rem;
+        padding: 10px 0;
+        gap: 12px;
+    }
+
+    .ratingValue {
+        font-size: 0.7rem;
+    }
+}
+
+/* ---------- 400px – very small phones ---------- */
+@media (max-width: 400px) {
+    .grid {
+        padding: 44px 10px 20px;
+    }
+
+    .innerBox {
+        padding: 20px 14px;
+    }
+
+    .price {
+        font-size: 3.2rem;
+    }
+
+    .currency {
+        font-size: 2rem;
     }
 }
