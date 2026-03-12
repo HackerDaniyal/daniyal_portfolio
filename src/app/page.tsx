@@ -60,17 +60,17 @@ export default function Home() {
         <Hero />
         
         <LazySection minHeight="100px"><ServiceMarquee /></LazySection>
-        <LazySection minHeight="600px" offset="400px"><About /></LazySection>
-        <LazySection minHeight="400px" offset="400px"><WhatIDo /></LazySection>
-        <LazySection minHeight="600px" offset="400px"><Process /></LazySection>
-        <LazySection minHeight="800px" offset="400px"><Portfolio /></LazySection>
-        <LazySection minHeight="500px" offset="400px"><Pricing /></LazySection>
-        <LazySection minHeight="400px" offset="400px"><Testimonials /></LazySection>
-        <LazySection minHeight="400px" offset="400px"><FAQ /></LazySection>
-        <LazySection minHeight="150px" offset="400px"><LogoMarquee /></LazySection>
-        <LazySection minHeight="600px" offset="400px"><WorldMap /></LazySection>
-        <LazySection minHeight="600px" offset="400px"><Contact /></LazySection>
-        <LazySection minHeight="300px" offset="400px"><Footer /></LazySection>
+        <LazySection minHeight="600px" offset="1500px"><About /></LazySection>
+        <LazySection minHeight="400px" offset="1500px"><WhatIDo /></LazySection>
+        <LazySection minHeight="600px" offset="1500px"><Process /></LazySection>
+        <LazySection minHeight="800px" offset="1500px"><Portfolio /></LazySection>
+        <LazySection minHeight="500px" offset="1500px"><Pricing /></LazySection>
+        <LazySection minHeight="400px" offset="1500px"><Testimonials /></LazySection>
+        <LazySection minHeight="400px" offset="1500px"><FAQ /></LazySection>
+        <LazySection minHeight="150px" offset="1500px"><LogoMarquee /></LazySection>
+        <LazySection minHeight="600px" offset="1500px"><WorldMap /></LazySection>
+        <LazySection minHeight="600px" offset="1500px"><Contact /></LazySection>
+        <LazySection minHeight="300px" offset="1500px"><Footer /></LazySection>
       </motion.main>
     </>
   );
