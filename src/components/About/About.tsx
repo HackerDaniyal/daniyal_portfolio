@@ -77,7 +77,7 @@ export default function About() {
                             <span className={styles.highlight}>Solve Real Problems</span>
                         </h2>
                         <div className={styles.descriptionWrapper}>
-                            {"I don't just build websites; I create digital homes for brands. My focus is on WordPress and Elementor, where I turn complex ideas into clean, functional designs that actually move the needle for your business.".split(" ").map((word, i) => (
+                            {"I don’t just build websites I help brands create their place online. I work mainly with WordPress and Elementor, turning ideas into simple, clean websites that support real business goals.".split(" ").map((word, i) => (
                                 <motion.span
                                     key={i}
                                     initial={{ opacity: 0, filter: "blur(10px)", y: 20, rotateX: 45 }}
@@ -95,7 +95,7 @@ export default function About() {
                             )).reduce((acc, curr, i) => i === 0 ? [curr] : [...acc, " ", curr], [] as React.ReactNode[])}
                         </div>
                         <div className={styles.descriptionWrapper}>
-                            {"Over the years, I've learned that a great site isn't just about looking pretty—it's about working weightlessly for your users. Whether we're starting from a blank canvas or refining a custom theme, I'm here to ensure your vision lands exactly as you imagined.".split(" ").map((word, i) => (
+                            {"Over time, I’ve learned that a good website isn’t only about looking nice. It should be easy to use and helpful for your visitors. Whether we start from scratch or improve an existing design, my goal is to build a website that matches your vision and works well for your business.".split(" ").map((word, i) => (
                                 <motion.span
                                     key={i + 100}
                                     initial={{ opacity: 0, filter: "blur(10px)", y: 20, rotateX: 45 }}
