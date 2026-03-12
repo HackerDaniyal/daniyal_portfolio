@@ -21,7 +21,6 @@ const Footer = dynamic(() => import("@/components/Footer/Footer"));
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Loading from "@/components/Loading/Loading";
-import LazySection from "@/components/Common/LazySection";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -59,18 +58,18 @@ export default function Home() {
         <Navbar />
         <Hero />
         
-        <LazySection minHeight="100px"><ServiceMarquee /></LazySection>
-        <LazySection minHeight="600px" offset="1500px"><About /></LazySection>
-        <LazySection minHeight="400px" offset="1500px"><WhatIDo /></LazySection>
-        <LazySection minHeight="600px" offset="1500px"><Process /></LazySection>
-        <LazySection minHeight="800px" offset="1500px"><Portfolio /></LazySection>
-        <LazySection minHeight="500px" offset="1500px"><Pricing /></LazySection>
-        <LazySection minHeight="400px" offset="1500px"><Testimonials /></LazySection>
-        <LazySection minHeight="400px" offset="1500px"><FAQ /></LazySection>
-        <LazySection minHeight="150px" offset="1500px"><LogoMarquee /></LazySection>
-        <LazySection minHeight="600px" offset="1500px"><WorldMap /></LazySection>
-        <LazySection minHeight="600px" offset="1500px"><Contact /></LazySection>
-        <LazySection minHeight="300px" offset="1500px"><Footer /></LazySection>
+        <ServiceMarquee />
+        <About />
+        <WhatIDo />
+        <Process />
+        <Portfolio />
+        <Pricing />
+        <Testimonials />
+        <FAQ />
+        <LogoMarquee />
+        <WorldMap />
+        <Contact />
+        <Footer />
       </motion.main>
     </>
   );
