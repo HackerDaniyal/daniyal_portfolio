@@ -7,8 +7,9 @@ import Link from "next/link";
 import { allProjects } from "@/lib/projects";
 import styles from "./Portfolio.module.css";
 
-// Display only the first 4 projects on the home page
-const featuredProjects = allProjects.slice(0, 4);
+// Display specifically requested projects on the home page
+const featuredSlugs = ['nudge', 'legacy-nutracare', 'nisa-intimate', 'sheer-beauty-care'];
+const featuredProjects = featuredSlugs.map(slug => allProjects.find(p => p.slug === slug)).filter(Boolean) as typeof allProjects;
 
 export default function Portfolio() {
     return (
