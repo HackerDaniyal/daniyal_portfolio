@@ -70,6 +70,6 @@ body {
 }
 
 .main-container {
-  width: 100vw;
+  width: 100%;
   background: var(--background);
 }

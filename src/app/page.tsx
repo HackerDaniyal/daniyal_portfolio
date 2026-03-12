@@ -51,6 +51,7 @@ export default function Home() {
       <motion.main
         key="main-content"
         className="w-full relative"
+        style={{ overflowX: "hidden", width: "100%", maxWidth: "100vw" }}
         initial={{ opacity: 0 }}
         animate={{ opacity: isLoading ? 0 : 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
