@@ -81,6 +81,7 @@
     flex-direction: column;
     position: relative;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: visible;
 }
 
 .cardFeatured {
@@ -322,11 +323,19 @@
 @media (max-width: 768px) {
     .section {
         padding: 80px 0;
+        overflow: hidden;
     }
 
     .grid {
         grid-template-columns: 1fr;
         gap: 40px;
+        padding: 40px 16px 20px 16px;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
 
     .innerBox {
@@ -348,5 +357,6 @@
 
     .header {
         margin-bottom: 40px;
+        padding: 0 16px;
     }
 }
