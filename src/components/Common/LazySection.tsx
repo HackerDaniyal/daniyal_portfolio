@@ -49,7 +49,7 @@ export default function LazySection({
         <div 
             ref={containerRef} 
             style={{ 
-                minHeight: isLoaded ? "auto" : minHeight,
+                minHeight: minHeight,
                 width: "100%",
                 contain: "layout style paint" // Further optimize rendering
             }}

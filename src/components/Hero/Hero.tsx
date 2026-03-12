@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -35,6 +36,14 @@ const avatars = [
 ];
 
 export default function Hero() {
+    const [isReady, setIsReady] = useState(false);
+
+    useEffect(() => {
+        const handleReady = () => setIsReady(true);
+        window.addEventListener("app-ready", handleReady);
+        return () => window.removeEventListener("app-ready", handleReady);
+    }, []);
+
     return (
         <section className={styles.hero}>
             <div className={styles.gridOverlay} />
@@ -43,7 +52,7 @@ export default function Hero() {
             <div className={styles.content}>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    animate={isReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ duration: 0.6 }}
                     className={styles.badge}
                 >
@@ -54,7 +63,7 @@ export default function Hero() {
 
                 <motion.h1
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    animate={isReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
                     className={styles.title}
                 >
@@ -64,7 +73,7 @@ export default function Hero() {
 
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    animate={isReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ duration: 0.6, delay: 0.3 }}
                     className={styles.description}
                 >
@@ -74,7 +83,7 @@ export default function Hero() {
 
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    animate={isReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ duration: 0.6, delay: 0.4 }}
                     className={styles.actionsContainer}
                 >

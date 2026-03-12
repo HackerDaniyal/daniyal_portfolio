@@ -42,34 +42,35 @@ export default function Home() {
 
   return (
     <>
-      <AnimatePresence mode="wait">
-        {isLoading ? (
+      <AnimatePresence>
+        {isLoading && (
           <Loading key="loader" onComplete={() => setIsLoading(false)} />
-        ) : (
-          <motion.main
-            key="main-content"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          >
-            <Navbar />
-            <Hero />
-            
-            <LazySection minHeight="100px"><ServiceMarquee /></LazySection>
-            <LazySection minHeight="600px" offset="400px"><About /></LazySection>
-            <LazySection minHeight="400px" offset="400px"><WhatIDo /></LazySection>
-            <LazySection minHeight="600px" offset="400px"><Process /></LazySection>
-            <LazySection minHeight="800px" offset="400px"><Portfolio /></LazySection>
-            <LazySection minHeight="500px" offset="400px"><Pricing /></LazySection>
-            <LazySection minHeight="400px" offset="400px"><Testimonials /></LazySection>
-            <LazySection minHeight="400px" offset="400px"><FAQ /></LazySection>
-            <LazySection minHeight="150px" offset="400px"><LogoMarquee /></LazySection>
-            <LazySection minHeight="600px" offset="400px"><WorldMap /></LazySection>
-            <LazySection minHeight="600px" offset="400px"><Contact /></LazySection>
-            <LazySection minHeight="300px" offset="400px"><Footer /></LazySection>
-          </motion.main>
         )}
       </AnimatePresence>
+
+      <motion.main
+        key="main-content"
+        className="w-full relative"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isLoading ? 0 : 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
+        <Navbar />
+        <Hero />
+        
+        <LazySection minHeight="100px"><ServiceMarquee /></LazySection>
+        <LazySection minHeight="600px" offset="400px"><About /></LazySection>
+        <LazySection minHeight="400px" offset="400px"><WhatIDo /></LazySection>
+        <LazySection minHeight="600px" offset="400px"><Process /></LazySection>
+        <LazySection minHeight="800px" offset="400px"><Portfolio /></LazySection>
+        <LazySection minHeight="500px" offset="400px"><Pricing /></LazySection>
+        <LazySection minHeight="400px" offset="400px"><Testimonials /></LazySection>
+        <LazySection minHeight="400px" offset="400px"><FAQ /></LazySection>
+        <LazySection minHeight="150px" offset="400px"><LogoMarquee /></LazySection>
+        <LazySection minHeight="600px" offset="400px"><WorldMap /></LazySection>
+        <LazySection minHeight="600px" offset="400px"><Contact /></LazySection>
+        <LazySection minHeight="300px" offset="400px"><Footer /></LazySection>
+      </motion.main>
     </>
   );
 }
