@@ -24,7 +24,7 @@ export default function LogoMarquee() {
                 <div className={styles.header}>
                     <div className={styles.labelWrapper}>
                         <span className={styles.dot} />
-                        <p className={styles.label}>PARTNERING WITH GLOBAL LEADERS</p>
+                        <p className={styles.label}>Technologies Behind My Work</p>
                     </div>
                     <h2 className={styles.title}>Bringing big ideas to life.</h2>
                 </div>
