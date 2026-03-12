@@ -68,8 +68,8 @@ export default function Hero() {
                     transition={{ duration: 0.6, delay: 0.3 }}
                     className={styles.description}
                 >
-                    Hi, I&apos;m <strong>Daniyal Alam</strong> — a WordPress & Elementor expert crafting stunning
-                    websites that convert visitors into loyal customers.
+                    Hi, I&apos;m <strong>Daniyal Alam</strong>. I build simple, clean WordPress websites with Elementor 
+                    that help businesses attract visitors and turn them into customers.
                 </motion.p>
 
                 <motion.div
