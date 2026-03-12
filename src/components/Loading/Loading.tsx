@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useSpring, useTransform, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import styles from "./Loading.module.css";
 
 const BRAND_VALUES = [
@@ -14,52 +14,47 @@ const BRAND_VALUES = [
     "DANIYAL ALAM"
 ];
 
+// Duration must match the CSS transition on .statusFill
+const LOADER_DURATION_MS = 2500;
+
 export default function Loading({ onComplete }: { onComplete: () => void }) {
     const [valueIndex, setValueIndex] = useState(0);
+    const [counter, setCounter] = useState(0);
+    const [started, setStarted] = useState(false);
 
-    // Unified High-Precision Physics Driver
-    // Lower stiffness and higher damping create a smooth, high-end "luxury" feel
-    const springValue = useSpring(0, {
-        stiffness: 40,
-        damping: 30,
-        mass: 1,
-        restDelta: 0.001 // High precision for synchronization
-    });
-
-    // Both visual elements derive from the EXACT same motion value
-    const displayCounter = useTransform(springValue, (latest) => Math.round(latest));
-    const progressScale = useTransform(springValue, [0, 100], [0, 1]);
-
+    // Kick off CSS animation after one frame so the browser paints the
+    // initial state (0%) first — prevents a flash to 100%.
     useEffect(() => {
-        // Start almost immediately with a slight "gentle" trigger
-        const startTimeout = setTimeout(() => {
-            springValue.set(100);
-        }, 150);
+        const raf = requestAnimationFrame(() => setStarted(true));
+        return () => cancelAnimationFrame(raf);
+    }, []);
 
-        // Synchronize brand flip with a rhythmic interval
-        const brandInterval = setInterval(() => {
+    // Pure JS counter — lightweight, won't block anything important.
+    useEffect(() => {
+        if (!started) return;
+        const step = LOADER_DURATION_MS / 100; // ms per 1%
+        let count = 0;
+        const id = setInterval(() => {
+            count++;
+            setCounter(count);
+            if (count >= 100) clearInterval(id);
+        }, step);
+        return () => clearInterval(id);
+    }, [started]);
+
+    // Brand value flip — same as before, independent of the counter.
+    useEffect(() => {
+        const id = setInterval(() => {
             setValueIndex((prev) => (prev + 1) % BRAND_VALUES.length);
         }, 350);
+        return () => clearInterval(id);
+    }, []);
 
-        return () => {
-            clearTimeout(startTimeout);
-            clearInterval(brandInterval);
-        };
-    }, [springValue]);
-
+    // Fire onComplete after exactly LOADER_DURATION_MS + a tiny buffer.
     useEffect(() => {
-        // Listen for completion with high precision
-        const unsubscribe = springValue.on("change", (latest) => {
-            // We use >= 99.9 to ensure we don't wait for the very last micro-jitter
-            if (latest >= 99.9) {
-                // Instant exit logic
-                setTimeout(() => {
-                    onComplete();
-                }, 100);
-            }
-        });
-        return () => unsubscribe();
-    }, [springValue, onComplete]);
+        const id = setTimeout(onComplete, LOADER_DURATION_MS + 150);
+        return () => clearTimeout(id);
+    }, [onComplete]);
 
     return (
         <motion.div
@@ -116,17 +111,19 @@ export default function Loading({ onComplete }: { onComplete: () => void }) {
                     </div>
 
                     <div className={styles.counterWrapper}>
-                        <motion.span className={styles.counter}>{displayCounter}</motion.span>
+                        <span className={styles.counter}>{counter}</span>
                         <span className={styles.percent}>%</span>
                     </div>
                 </div>
 
                 <div className={styles.bottomRow}>
                     <div className={styles.statusBar}>
-                        <motion.div
+                        {/* CSS transition — runs on compositor, immune to main thread jank */}
+                        <div
                             className={styles.statusFill}
                             style={{
-                                scaleX: progressScale,
+                                transform: started ? "scaleX(1)" : "scaleX(0)",
+                                transition: `transform ${LOADER_DURATION_MS}ms linear`,
                                 transformOrigin: "left"
                             }}
                         />
